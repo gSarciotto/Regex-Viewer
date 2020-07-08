@@ -1,7 +1,6 @@
 /* Base Token Class */
 
 export interface TokenInterface {
-    readonly variant: "normal" | "colored";
     readonly text: string;
     readonly range: [number, number];
 }
@@ -9,16 +8,10 @@ export interface TokenInterface {
 // ideally the Token class would be abstract
 
 class Token implements TokenInterface {
-    readonly variant: "normal" | "colored";
     readonly text: string;
-    readonly range: [number, number];
+    readonly range: [number, number]; //range of the token in the input string, [begin, end)
 
-    constructor(
-        variant: "normal" | "colored",
-        text: string,
-        range: [number, number]
-    ) {
-        this.variant = variant;
+    constructor(text: string, range: [number, number]) {
         this.text = text;
         this.range = range;
     }
