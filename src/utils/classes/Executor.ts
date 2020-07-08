@@ -21,7 +21,7 @@ class Executor implements ExecutorInterface {
         let match: RegExpExecArray | null;
         if (this.regex.global) {
             //g flag
-            let matches: RegExpExecArray[] = [];
+            const matches: RegExpExecArray[] = [];
             while ((match = this.regex.exec(this.input)) !== null) {
                 matches.push(match);
             }
