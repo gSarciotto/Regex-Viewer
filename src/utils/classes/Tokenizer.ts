@@ -14,7 +14,7 @@ export interface TokenizerInterface {
     run: (input: string, matches: RegExpExecArray[]) => Token[]; //when doing other things than exec, see the correct input type
 }
 
-class Tokenizer implements TokenizerInterface {
+export class Tokenizer implements TokenizerInterface {
     run(input: string, matches: RegExpExecArray[]): Token[] {
         // criar um novo metodo para ver se tem um normal token entre endLastToken e beginToken. Esse metodo retorna o normal token se tiver. Esse metodo pode ser usado para ver se tem NormalToken entre o ultimo match e o final do input.
         const tokens: Token[] = [];

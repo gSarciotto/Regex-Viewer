@@ -1,12 +1,12 @@
 /* The class that will execute a regex operation into an input string */
 
-interface ExecutorInterface {
+export interface ExecutorInterface {
     readonly regex: RegExp;
     readonly input: string;
     exec: () => RegExpExecArray[];
 }
 
-class Executor implements ExecutorInterface {
+export class Executor implements ExecutorInterface {
     readonly regex: RegExp;
     readonly input: string;
 

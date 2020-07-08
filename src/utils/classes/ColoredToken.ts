@@ -6,10 +6,10 @@ export interface ColoredTokenInterface extends TokenInterface {
     bgColor: string;
 }
 
-class ColoredToken extends Token implements ColoredTokenInterface {
+export class ColoredToken extends Token implements ColoredTokenInterface {
     bgColor: string;
 
-    constructor(text: string, range: [number, number], bgColor: string = "") {
+    constructor(text: string, range: [number, number], bgColor = "") {
         super(text, range);
         this.bgColor = bgColor;
     }
