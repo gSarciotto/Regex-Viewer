@@ -20,40 +20,59 @@ class Tokenizer implements TokenizerInterface {
         const tokens: Token[] = [];
         let token: Token;
         if (input.length === 0) {
+            //maybe throw exception instead
             token = new NormalToken("", [0, 0]);
             return [token];
         }
-        if (matches.length === 0) {
+        /*if (matches.length === 0) {
             token = new NormalToken(input, [0, input.length]);
             return [token];
-        }
+        }*/
         let beginToken: number,
             endLastToken = 0,
             endToken: number;
+        let normalToken: Token | null;
         for (const match of matches) {
             beginToken = match.index;
-            if (endLastToken !== beginToken) {
-                //there is NormalText between the matches
-                const text = input.slice(endLastToken, beginToken);
-                token = new NormalToken(text, [endLastToken, beginToken]);
-                tokens.push(token);
+            // checks for normal text before match
+            normalToken = this.getNormalTokenInRange(input, [
+                endLastToken,
+                beginToken
+            ]);
+            if (normalToken) {
                 endLastToken = beginToken;
+                tokens.push(normalToken);
             }
             const matchText: string = match[0];
             endToken = beginToken + matchText.length;
             token = new ColoredToken(matchText, [beginToken, endToken]);
             tokens.push(token);
             endLastToken = endToken;
-        } // see if there is normal text after the last match
-        if (endLastToken !== input.length) {
-            //there is normal text after last match
-            beginToken = endLastToken;
-            endToken = input.length;
-            const text = input.slice(beginToken, endToken);
-            token = new NormalToken(text, [endLastToken, beginToken]);
-            tokens.push(token);
         }
+        // see if there is normal text after the last match
+        normalToken = this.getNormalTokenInRange(input, [
+            endLastToken,
+            input.length
+        ]);
+        if (normalToken) {
+            tokens.push(normalToken);
+        }
+
         return tokens;
+    }
+
+    private getNormalTokenInRange(
+        input: string,
+        range: [number, number]
+    ): NormalToken | null {
+        // Checks input in the range [range[0], range[1]) for normal text. If normal text is not found (range[0]==range[1]) then return null else return the NormalToken.
+        // This method should be called with the range=[endLastToken, beginToken]
+        if (range[0] === range[1]) {
+            //no normal text
+            return null;
+        }
+        const text = input.slice(range[0], range[1]);
+        return new NormalToken(text, range);
     }
 }
 

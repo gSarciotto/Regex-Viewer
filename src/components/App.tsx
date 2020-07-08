@@ -8,7 +8,7 @@ function App(): JSX.Element {
         "abbcadef fejkcadkl DjwbCADfdw DjwBCADfdw DjwCAD dj cad deregue";
     //const input = "no match should happen";
     const regexpString = "b*(cad)(\\w*)";
-    const flags = "i";
+    const flags = "gi";
     const executor = new Executor(regexpString, input, flags);
     const matches = executor.exec();
     console.log(matches);
