@@ -7,3 +7,5 @@ export * from "./classes/Colorizer";
 export * from "./classes/Executor";
 
 export * from "./classes/Tokenizer";
+
+export * from "./TokenConverter";

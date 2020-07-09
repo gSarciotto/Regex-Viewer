@@ -1,7 +1,7 @@
 import React from "react";
 import NormalText from "./NormalText";
 import ColoredText from "./ColoredText";
-import { Executor, Tokenizer, Colorizer } from "../utils/utils";
+import { Executor, Tokenizer, Colorizer, TokenConverter } from "../utils/utils";
 
 function App(): JSX.Element {
     const input =
@@ -22,13 +22,11 @@ function App(): JSX.Element {
     const colorizer = new Colorizer([color1, color2]);
     colorizer.colorAll(tokens);
     console.log(tokens);
-    return (
-        <div>
-            <NormalText>teste normal </NormalText>
-            <ColoredText bgColor={color1}>{"teste colorido "}</ColoredText>
-            <NormalText>teste normal 2</NormalText>
-        </div>
-    );
+
+    const converter = new TokenConverter();
+    const textsElements = converter.convertAll(tokens);
+    console.log(textsElements);
+    return <div>{textsElements}</div>;
 }
 
 export default App;
