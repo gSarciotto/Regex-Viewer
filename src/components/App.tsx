@@ -1,8 +1,7 @@
 import React from "react";
-import Typography from "@material-ui/core/Typography";
-import Executor from "../utils/classes/Executor";
-import Tokenizer from "../utils/classes/Tokenizer";
-import Colorizer from "../utils/classes/Colorizer";
+import NormalText from "./NormalText";
+import ColoredText from "./ColoredText";
+import { Executor, Tokenizer, Colorizer } from "../utils/utils";
 
 function App(): JSX.Element {
     const input =
@@ -23,7 +22,13 @@ function App(): JSX.Element {
     const colorizer = new Colorizer([color1, color2]);
     colorizer.colorAll(tokens);
     console.log(tokens);
-    return <Typography variant="h1">Teste</Typography>;
+    return (
+        <div>
+            <NormalText>teste normal </NormalText>
+            <ColoredText bgColor={color1}>{"teste colorido "}</ColoredText>
+            <NormalText>teste normal 2</NormalText>
+        </div>
+    );
 }
 
 export default App;
