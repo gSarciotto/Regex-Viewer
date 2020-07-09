@@ -1,6 +1,4 @@
 import React from "react";
-import NormalText from "./NormalText";
-import ColoredText from "./ColoredText";
 import { Executor, Tokenizer, Colorizer, TokenConverter } from "../utils/utils";
 
 function App(): JSX.Element {

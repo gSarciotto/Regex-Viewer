@@ -33,9 +33,10 @@ export class Colorizer implements ColorizerInterface {
     }
 
     private getNextColor(): Color {
+        const color = this.palette[this.currentColorIndex];
         this.currentColorIndex =
             (this.currentColorIndex + 1) % this.palette.length;
-        return this.palette[this.currentColorIndex];
+        return color;
     }
 }
 
