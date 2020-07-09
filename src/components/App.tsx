@@ -1,5 +1,6 @@
 import React from "react";
 import { Executor, Tokenizer, Colorizer, TokenConverter } from "../utils/utils";
+import EditableBox from "./EditableBox";
 
 function App(): JSX.Element {
     const input =
@@ -22,9 +23,11 @@ function App(): JSX.Element {
     console.log(tokens);
 
     const converter = new TokenConverter();
-    const textsElements = converter.convertAll(tokens);
+    const textsElements = converter.convertAllToJSXElement(tokens);
     console.log(textsElements);
-    return <div>{textsElements}</div>;
+
+    const html = converter.convertAllToString(tokens);
+    return <EditableBox html={html} />;
 }
 
 export default App;
