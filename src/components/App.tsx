@@ -1,33 +1,10 @@
 import React from "react";
-import { Executor, Tokenizer, Colorizer, TokenConverter } from "../utils/utils";
-import EditableBox from "./EditableBox";
+import Main from "./Main";
+
+// editablecontent doest work. Maybe make a TextField with Input width=1 and add margins so that it lands where the user clicks
 
 function App(): JSX.Element {
-    const input =
-        "abbcadef fejkcadkl DjwbCADfdw DjwBCADfdw DjwCAD dj cad deregue";
-    //const input = "no match should happen";
-    const regexpString = "b*(cad)(\\w*)";
-    const flags = "gi";
-    const executor = new Executor(regexpString, input, flags);
-    const matches = executor.exec();
-    console.log(matches);
-    const tokenizer = new Tokenizer();
-    const tokens = tokenizer.run(input, matches);
-    console.log(tokens);
-
-    const color1 = "#BBDEFB";
-    const color2 = "#1976D2";
-
-    const colorizer = new Colorizer([color1, color2]);
-    colorizer.colorAll(tokens);
-    console.log(tokens);
-
-    const converter = new TokenConverter();
-    const textsElements = converter.convertAllToJSXElement(tokens);
-    console.log(textsElements);
-
-    const html = converter.convertAllToString(tokens);
-    return <EditableBox html={html} />;
+    return <Main />;
 }
 
 export default App;
