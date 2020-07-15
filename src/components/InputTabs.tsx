@@ -12,16 +12,19 @@ import InputTab from "./tabs/InputTab";
 
 export interface InputTabsProps {
     children: React.ReactNode;
+    handleInputChange: React.ChangeEventHandler<HTMLTextAreaElement>;
+    inputText: string;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
     "panel-container": {
         border: `1px solid ${theme.palette.primary.main}`, //later fix the border
-        padding: theme.spacing(2, 1) //later add height
+        padding: theme.spacing(2, 1) //later add height, or add the height onto the tabs themselves
     }
 }));
 
 function InputTabs(props: InputTabsProps): JSX.Element {
+    // maybe remove swipeableViews to disallow touch swapping in mobile and allow the user to select range in the text inside like in bigger screens
     const [tabValue, setTabValue] = useState(0);
 
     const theme = useTheme();
@@ -69,7 +72,8 @@ function InputTabs(props: InputTabsProps): JSX.Element {
                     <InputTab
                         tabValue={tabValue}
                         index={0}
-                        inputText="input tab"
+                        inputText={props.inputText}
+                        handleInputChange={props.handleInputChange}
                     />
                     <ViewTab tabValue={tabValue} index={1}>
                         {props.children}

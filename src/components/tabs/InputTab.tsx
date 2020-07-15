@@ -1,10 +1,12 @@
 import React from "react";
 import BaseTab from "./BaseTab";
+import Input from "@material-ui/core/Input";
 
 export interface InputTabProps {
     index: number;
     tabValue: number;
     inputText: string;
+    handleInputChange: React.ChangeEventHandler<HTMLTextAreaElement>;
 }
 
 function InputTab(props: InputTabProps): JSX.Element {
@@ -15,7 +17,14 @@ function InputTab(props: InputTabProps): JSX.Element {
             id="input-tab"
             label="input-tab-panel"
         >
-            {props.inputText}
+            <Input
+                fullWidth
+                disableUnderline
+                multiline
+                aria-label="Input String"
+                onChange={props.handleInputChange}
+                value={props.inputText}
+            />
         </BaseTab>
     );
 }

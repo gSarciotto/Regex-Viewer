@@ -1,11 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
 import { Executor, Tokenizer, Colorizer, TokenConverter } from "../utils/utils";
 import InputTabs from "./InputTabs";
 
 function Main(): JSX.Element {
-    const input =
-        "abbcadef fejkcadkl DjwbCADfdw DjwBCADfdw DjwCAD dj cad deregue";
+    // MAybe pass the active tab index to Main and calculate things only when the tab changes to the view tab
+    /*const input =
+        "abbcadef fejkcadkl DjwbCADfdw DjwBCADfdw DjwCAD dj cad deregue";*/
     //const input = "no match should happen";
+
+    const [input, setInput] = useState(
+        "abbcadef fejkcadkl DjwbCADfdw DjwBCADfdw DjwCAD dj cad deregue"
+    );
+
+    const handleInputChange: React.ChangeEventHandler<HTMLTextAreaElement> = (
+        e: React.ChangeEvent<HTMLTextAreaElement>
+    ): void => {
+        setInput(e.currentTarget.value);
+    };
+
     const regexpString = "b*(cad)(\\w*)";
     const flags = "gi";
     const executor = new Executor(regexpString, input, flags);
@@ -28,7 +40,11 @@ function Main(): JSX.Element {
 
     const html = converter.convertAllToString(tokens);
     //return <div>{textsElements}</div>;
-    return <InputTabs>{textsElements}</InputTabs>;
+    return (
+        <InputTabs inputText={input} handleInputChange={handleInputChange}>
+            {textsElements}
+        </InputTabs>
+    );
 }
 
 export default Main;
