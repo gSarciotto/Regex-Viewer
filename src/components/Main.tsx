@@ -1,5 +1,6 @@
 import React from "react";
 import { Executor, Tokenizer, Colorizer, TokenConverter } from "../utils/utils";
+import InputTabs from "./InputTabs";
 
 function Main(): JSX.Element {
     const input =
@@ -26,7 +27,8 @@ function Main(): JSX.Element {
     console.log(textsElements);
 
     const html = converter.convertAllToString(tokens);
-    return <div>{textsElements}</div>;
+    //return <div>{textsElements}</div>;
+    return <InputTabs />;
 }
 
 export default Main;
