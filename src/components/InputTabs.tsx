@@ -10,6 +10,10 @@ import Tab from "@material-ui/core/Tab";
 import ViewTab from "./tabs/ViewTab";
 import InputTab from "./tabs/InputTab";
 
+export interface InputTabsProps {
+    children: React.ReactNode;
+}
+
 const useStyles = makeStyles((theme: Theme) => ({
     "panel-container": {
         border: `1px solid ${theme.palette.primary.main}`, //later fix the border
@@ -17,7 +21,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     }
 }));
 
-const InputTabs: FunctionComponent<{}> = () => {
+function InputTabs(props: InputTabsProps): JSX.Element {
     const [tabValue, setTabValue] = useState(0);
 
     const theme = useTheme();
@@ -67,11 +71,13 @@ const InputTabs: FunctionComponent<{}> = () => {
                         index={0}
                         inputText="input tab"
                     />
-                    <ViewTab tabValue={tabValue} index={1} />
+                    <ViewTab tabValue={tabValue} index={1}>
+                        {props.children}
+                    </ViewTab>
                 </SwipeableViews>
             </Box>
         </div>
     );
-};
+}
 
 export default InputTabs;

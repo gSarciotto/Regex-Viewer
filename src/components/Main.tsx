@@ -28,7 +28,7 @@ function Main(): JSX.Element {
 
     const html = converter.convertAllToString(tokens);
     //return <div>{textsElements}</div>;
-    return <InputTabs />;
+    return <InputTabs>{textsElements}</InputTabs>;
 }
 
 export default Main;

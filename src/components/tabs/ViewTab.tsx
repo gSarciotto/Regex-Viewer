@@ -4,6 +4,7 @@ import BaseTab from "./BaseTab";
 export interface ViewTabProps {
     index: number;
     tabValue: number;
+    children: React.ReactNode;
 }
 
 function ViewTab(props: ViewTabProps): JSX.Element {
@@ -14,7 +15,7 @@ function ViewTab(props: ViewTabProps): JSX.Element {
             id="view-tab"
             label="view-tab-panel"
         >
-            view tab
+            {props.children}
         </BaseTab>
     );
 }
