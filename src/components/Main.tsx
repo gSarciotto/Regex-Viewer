@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Executor, Tokenizer, Colorizer, TokenConverter } from "../utils/utils";
 import InputTabs from "./InputTabs";
+import RegexContainer from "./RegexContainer";
 
 function Main(): JSX.Element {
     // MAybe pass the active tab index to Main and calculate things only when the tab changes to the view tab
@@ -11,6 +12,7 @@ function Main(): JSX.Element {
     const [input, setInput] = useState(
         "abbcadef fejkcadkl DjwbCADfdw DjwBCADfdw DjwCAD dj cad deregue"
     );
+    const [regexBody, setRegexBody] = useState("b*(cad)(\\w*)");
 
     const handleInputChange: React.ChangeEventHandler<HTMLTextAreaElement> = (
         e: React.ChangeEvent<HTMLTextAreaElement>
@@ -18,9 +20,9 @@ function Main(): JSX.Element {
         setInput(e.currentTarget.value);
     };
 
-    const regexpString = "b*(cad)(\\w*)";
+    //const regexpString = "b*(cad)(\\w*)";
     const flags = "gi";
-    const executor = new Executor(regexpString, input, flags);
+    const executor = new Executor(regexBody, input, flags);
     const matches = executor.exec();
     console.log(matches);
     const tokenizer = new Tokenizer();
@@ -41,9 +43,12 @@ function Main(): JSX.Element {
     const html = converter.convertAllToString(tokens);
     //return <div>{textsElements}</div>;
     return (
-        <InputTabs inputText={input} handleInputChange={handleInputChange}>
-            {textsElements}
-        </InputTabs>
+        <div>
+            <RegexContainer />
+            <InputTabs inputText={input} handleInputChange={handleInputChange}>
+                {textsElements}
+            </InputTabs>
+        </div>
     );
 }
 
