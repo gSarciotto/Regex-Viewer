@@ -1,7 +1,6 @@
 /* Component that holds the inputs for the regex */
 
-import React, { useState, FunctionComponent } from "react";
-import SwipeableViews from "react-swipeable-views";
+import React, { useState } from "react";
 import { makeStyles, Theme, useTheme } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Box from "@material-ui/core/Box";
@@ -12,6 +11,8 @@ import InputTab from "./tabs/InputTab";
 
 export interface InputTabsProps {
     children: React.ReactNode;
+    activeTabIndex: number;
+    handleTabChange: (e: React.ChangeEvent<{}>, newValue: number) => void;
     handleInputChange: React.ChangeEventHandler<HTMLTextAreaElement>;
     inputText: string;
 }
@@ -25,30 +26,26 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 function InputTabs(props: InputTabsProps): JSX.Element {
     // maybe remove swipeableViews to disallow touch swapping in mobile and allow the user to select range in the text inside like in bigger screens
-    const [tabValue, setTabValue] = useState(0);
+    //const [tabValue, setTabValue] = useState(1);
 
     const theme = useTheme();
     const classes = useStyles(theme);
 
-    const handleTabChange = (
+    /*const handleTabChange = (
         e: React.ChangeEvent<{}>,
         newValue: number
     ): void => {
         setTabValue(newValue);
-    };
+    };*/
 
-    const handleChangeIndex = (index: number): void => {
-        //handle for change of swipeableViews through swipe?
-        setTabValue(index);
-    };
     //pass the outer box to just include the panels
     return (
         <div>
             <AppBar position="static" color="primary">
                 <Tabs
                     variant={"fullWidth"}
-                    value={tabValue}
-                    onChange={handleTabChange}
+                    value={props.activeTabIndex}
+                    onChange={props.handleTabChange}
                     aria-label={"teste"}
                 >
                     <Tab
@@ -64,21 +61,15 @@ function InputTabs(props: InputTabsProps): JSX.Element {
                 </Tabs>
             </AppBar>
             <Box className={classes["panel-container"]}>
-                <SwipeableViews
-                    axis={theme.direction === "rtl" ? "x-reverse" : "x"}
-                    index={tabValue}
-                    onChangeIndex={handleChangeIndex}
-                >
-                    <InputTab
-                        tabValue={tabValue}
-                        index={0}
-                        inputText={props.inputText}
-                        handleInputChange={props.handleInputChange}
-                    />
-                    <ViewTab tabValue={tabValue} index={1}>
-                        {props.children}
-                    </ViewTab>
-                </SwipeableViews>
+                <InputTab
+                    tabValue={props.activeTabIndex}
+                    index={0}
+                    inputText={props.inputText}
+                    handleInputChange={props.handleInputChange}
+                />
+                <ViewTab tabValue={props.activeTabIndex} index={1}>
+                    {props.children}
+                </ViewTab>
             </Box>
         </div>
     );
