@@ -7,6 +7,7 @@ import InputLabel from "@material-ui/core/InputLabel";
 import Input from "@material-ui/core/Input";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
+import OutlinedInput from "@material-ui/core/OutlinedInput";
 
 // later add explanation text for flags and styling
 
@@ -85,7 +86,7 @@ function RegexFlags(): JSX.Element {
     };
 
     return (
-        <FormControl fullWidth>
+        <FormControl fullWidth variant="outlined">
             <InputLabel id="regex-flags-label">Flags</InputLabel>
             <Select
                 labelId="regex-flags-label"
@@ -93,7 +94,7 @@ function RegexFlags(): JSX.Element {
                 multiple
                 value={flags}
                 onChange={handleChange}
-                input={<Input />}
+                input={<OutlinedInput />}
                 renderValue={(selected): React.ReactNode => (
                     <Typography color="secondary" variant="body1">
                         {(selected as string[]).join("")}
