@@ -23,7 +23,7 @@ export class Colorizer implements ColorizerInterface {
 
     colorOne(token: Token): void {
         //If token is not colored, then it is a no op.
-        if (token instanceof ColoredToken) {
+        if (token instanceof ColoredToken && !token.bgColor) {
             token.bgColor = this.getNextColor();
         }
     }
