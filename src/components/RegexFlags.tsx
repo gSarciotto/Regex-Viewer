@@ -84,9 +84,8 @@ function RegexFlags(): JSX.Element {
         setFlags(e.target.value as string[]);
     };
 
-    //<ListItemText primary={getFullName(flag)} />
     return (
-        <FormControl>
+        <FormControl fullWidth>
             <InputLabel id="regex-flags-label">Flags</InputLabel>
             <Select
                 labelId="regex-flags-label"
@@ -95,7 +94,12 @@ function RegexFlags(): JSX.Element {
                 value={flags}
                 onChange={handleChange}
                 input={<Input />}
-                renderValue={(selected) => (selected as string[]).join("")}
+                renderValue={(selected): React.ReactNode => (
+                    <Typography color="secondary" variant="body1">
+                        {(selected as string[]).join("")}
+                    </Typography>
+                )}
+                disableUnderline
             >
                 {flagsOptions.map((flag) => (
                     <MenuItem key={flag} value={flag}>
