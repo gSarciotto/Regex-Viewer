@@ -11,16 +11,15 @@ import InputTabs from "./InputTabs";
 import RegexContainer from "./RegexContainer";
 
 function Main(): JSX.Element {
-    // MAybe pass the active tab index to Main and calculate things only when the tab changes to the view tab
-    /*const input =
-        "abbcadef fejkcadkl DjwbCADfdw DjwBCADfdw DjwCAD dj cad deregue";*/
-    //const input = "no match should happen";
+    // now pass the state from regex flag to main, dont forget to add the flag state to the dependendy list of use effect
 
     const [input, setInput] = useState(
         "abbcadef fejkcadkl DjwbCADfdw DjwBCADfdw DjwCAD dj cad deregue"
     );
     const [regexBody, setRegexBody] = useState("b*(cad)(\\w*)");
     const [activeTabIndex, setActiveTabIndex] = useState(1); //state that says which tab of InputTabs is currently active. This is needed here so that we only calculate the regex when we change to View tab. 0 == input, 1 == view
+
+    const [flags, setFlags] = useState("gi");
 
     const handleInputChange: React.ChangeEventHandler<HTMLTextAreaElement> = (
         e: React.ChangeEvent<HTMLTextAreaElement>
@@ -41,7 +40,12 @@ function Main(): JSX.Element {
         setActiveTabIndex(newValue);
     };
 
-    const flags = "gi";
+    const updateFlags = (newFlags: string): void => {
+        console.log(newFlags);
+        setFlags(newFlags);
+    };
+
+    //const flags = "gi";
 
     const [textElements, setTextElements] = useState<JSX.Element[]>([]);
 
@@ -73,7 +77,7 @@ function Main(): JSX.Element {
             const converter = new TokenConverter();
             setTextElements(converter.convertAllToJSXElement(tokens));
         }
-    }, [activeTabIndex, regexBody]);
+    }, [activeTabIndex, regexBody, flags]);
 
     /*const executor = new Executor(regexBody, input, flags);
     const matches = executor.exec();
@@ -100,6 +104,8 @@ function Main(): JSX.Element {
             <RegexContainer
                 bodyInputValue={regexBody}
                 handleChangeBodyInput={handleChangeBodyInput}
+                flags={flags}
+                updateFlags={updateFlags}
             />
             <InputTabs
                 inputText={input}

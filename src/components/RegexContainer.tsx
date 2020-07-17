@@ -1,9 +1,9 @@
 import React from "react";
 import Grid from "@material-ui/core/Grid";
 import RegexBody, { RegexBodyProps } from "./RegexBody";
-import RegexFlags from "./RegexFlags";
+import RegexFlags, { RegexFlagsProps } from "./RegexFlags";
 
-type RegexContainerProps = RegexBodyProps;
+interface RegexContainerProps extends RegexFlagsProps, RegexBodyProps {}
 
 function RegexContainer(props: RegexContainerProps): JSX.Element {
     return (
@@ -15,7 +15,10 @@ function RegexContainer(props: RegexContainerProps): JSX.Element {
                 />
             </Grid>
             <Grid item xs={3} md={1}>
-                <RegexFlags />
+                <RegexFlags
+                    flags={props.flags}
+                    updateFlags={props.updateFlags}
+                />
             </Grid>
         </Grid>
     );

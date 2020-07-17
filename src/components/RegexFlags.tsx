@@ -78,13 +78,24 @@ function getFlagDisplay(flag: string): React.ReactPortal {
     return display as React.ReactPortal;
 }
 
-function RegexFlags(): JSX.Element {
-    const [flags, setFlags] = useState<string[]>(["g", "i"]); //contains only the shorthand letters
+export interface RegexFlagsProps {
+    flags: string;
+    updateFlags: (newFlags: string) => void;
+}
+
+function RegexFlags(props: RegexFlagsProps): JSX.Element {
+    /*const [flags, setFlags] = useState<string[]>(["g", "i"]); //contains only the shorthand letters
     const handleChange = (e: React.ChangeEvent<{ value: unknown }>): void => {
         console.log(e.currentTarget.value);
         setFlags(e.target.value as string[]);
+    };*/
+    const flagsArray: string[] = props.flags
+        ? props.flags.split("")
+        : ([] as string[]); // if props.flags is empty, we need to return an empty, if we just did props.flags.split, in the case of empty string flagsArray would be an empty string and not an array.
+    const handleChange = (e: React.ChangeEvent<{ value: unknown }>): void => {
+        const flags = (e.target.value as string[]).join("");
+        props.updateFlags(flags);
     };
-
     return (
         <FormControl fullWidth variant="outlined">
             <InputLabel id="regex-flags-label">Flags</InputLabel>
@@ -92,7 +103,7 @@ function RegexFlags(): JSX.Element {
                 labelId="regex-flags-label"
                 id="regex-flags-select"
                 multiple
-                value={flags}
+                value={flagsArray}
                 onChange={handleChange}
                 input={<OutlinedInput />}
                 renderValue={(selected): React.ReactNode => (
@@ -105,7 +116,7 @@ function RegexFlags(): JSX.Element {
                 {flagsOptions.map((flag) => (
                     <MenuItem key={flag} value={flag}>
                         <Container>{getFlagDisplay(flag)}</Container>
-                        <Checkbox checked={flags.includes(flag)} />
+                        <Checkbox checked={flagsArray.includes(flag)} />
                     </MenuItem>
                 ))}
             </Select>
