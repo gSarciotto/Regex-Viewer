@@ -16,7 +16,6 @@ export interface TokenizerInterface {
 
 export class Tokenizer implements TokenizerInterface {
     run(input: string, matches: RegExpExecArray[]): Token[] {
-        // criar um novo metodo para ver se tem um normal token entre endLastToken e beginToken. Esse metodo retorna o normal token se tiver. Esse metodo pode ser usado para ver se tem NormalToken entre o ultimo match e o final do input.
         const tokens: Token[] = [];
         let token: Token;
         if (input.length === 0) {
@@ -24,10 +23,6 @@ export class Tokenizer implements TokenizerInterface {
             token = new NormalToken("", [0, 0]);
             return [token];
         }
-        /*if (matches.length === 0) {
-            token = new NormalToken(input, [0, input.length]);
-            return [token];
-        }*/
         let beginToken: number,
             endLastToken = 0,
             endToken: number;

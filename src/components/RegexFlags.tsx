@@ -1,10 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import Checkbox from "@material-ui/core/Checkbox";
 import Select from "@material-ui/core/Select";
 import FormControl from "@material-ui/core/FormControl";
 import MenuItem from "@material-ui/core/MenuItem";
 import InputLabel from "@material-ui/core/InputLabel";
-import Input from "@material-ui/core/Input";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 import OutlinedInput from "@material-ui/core/OutlinedInput";
@@ -84,11 +83,6 @@ export interface RegexFlagsProps {
 }
 
 function RegexFlags(props: RegexFlagsProps): JSX.Element {
-    /*const [flags, setFlags] = useState<string[]>(["g", "i"]); //contains only the shorthand letters
-    const handleChange = (e: React.ChangeEvent<{ value: unknown }>): void => {
-        console.log(e.currentTarget.value);
-        setFlags(e.target.value as string[]);
-    };*/
     const flagsArray: string[] = props.flags
         ? props.flags.split("")
         : ([] as string[]); // if props.flags is empty, we need to return an empty, if we just did props.flags.split, in the case of empty string flagsArray would be an empty string and not an array.

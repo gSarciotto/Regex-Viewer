@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import {
     Executor,
     Tokenizer,
@@ -11,8 +11,6 @@ import InputTabs from "./InputTabs";
 import RegexContainer from "./RegexContainer";
 
 function Main(): JSX.Element {
-    // now pass the state from regex flag to main, dont forget to add the flag state to the dependendy list of use effect
-
     const [input, setInput] = useState(
         "abbcadef fejkcadkl DjwbCADfdw DjwBCADfdw DjwCAD dj cad deregue"
     );
@@ -44,8 +42,6 @@ function Main(): JSX.Element {
         console.log(newFlags);
         setFlags(newFlags);
     };
-
-    //const flags = "gi";
 
     const [textElements, setTextElements] = useState<JSX.Element[]>([]);
 
@@ -79,26 +75,6 @@ function Main(): JSX.Element {
         }
     }, [activeTabIndex, regexBody, flags]);
 
-    /*const executor = new Executor(regexBody, input, flags);
-    const matches = executor.exec();
-    console.log(matches);
-    const tokenizer = new Tokenizer();
-    const tokens = tokenizer.run(input, matches);
-    console.log(tokens);
-
-    const color1 = "#BBDEFB";
-    const color2 = "#1976D2";
-
-    const colorizer = new Colorizer([color1, color2]);
-    colorizer.colorAll(tokens);
-    console.log(tokens);
-
-    const converter = new TokenConverter();
-    const textsElements = converter.convertAllToJSXElement(tokens);
-    console.log(textsElements);
-
-    const html = converter.convertAllToString(tokens);
-    //return <div>{textsElements}</div>;*/
     return (
         <div>
             <RegexContainer

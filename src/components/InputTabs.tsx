@@ -1,6 +1,6 @@
 /* Component that holds the inputs for the regex */
 
-import React, { useState } from "react";
+import React from "react";
 import { makeStyles, Theme, useTheme } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Box from "@material-ui/core/Box";
@@ -25,18 +25,8 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 function InputTabs(props: InputTabsProps): JSX.Element {
-    // maybe remove swipeableViews to disallow touch swapping in mobile and allow the user to select range in the text inside like in bigger screens
-    //const [tabValue, setTabValue] = useState(1);
-
     const theme = useTheme();
     const classes = useStyles(theme);
-
-    /*const handleTabChange = (
-        e: React.ChangeEvent<{}>,
-        newValue: number
-    ): void => {
-        setTabValue(newValue);
-    };*/
 
     //pass the outer box to just include the panels
     return (

@@ -1,5 +1,4 @@
 import React from "react";
-import Input from "@material-ui/core/Input";
 import FormControl from "@material-ui/core/FormControl";
 import OutlinedInput from "@material-ui/core/OutlinedInput";
 import InputLabel from "@material-ui/core/InputLabel";
@@ -38,15 +37,6 @@ function RegexBody(props: RegexBodyProps): JSX.Element {
             />
         </FormControl>
     );
-    /*return (
-        <Input
-            autoFocus
-            disableUnderline
-            fullWidth
-            aria-label="Regular Expression Body Input"
-            id="regex-body-input"
-        />
-    );*/
 }
 
 export default RegexBody;

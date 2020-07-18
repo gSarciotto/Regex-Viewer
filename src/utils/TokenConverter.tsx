@@ -3,7 +3,6 @@
 */
 
 import React from "react";
-import ReactDOMServer from "react-dom/server";
 import Token from "./classes/Token";
 import ColoredToken from "./classes/ColoredToken";
 import ColoredText from "../components/ColoredText";
@@ -31,7 +30,6 @@ export class TokenConverter implements TokenConverterInterface {
             );
         } else {
             // token is normal
-
             return (
                 <NormalText key={`${token.text}-${this.keyNumber}`}>
                     {token.text}
@@ -49,20 +47,6 @@ export class TokenConverter implements TokenConverterInterface {
         }, this);
 
         return elements;
-    }
-
-    convertOneToString(token: Token): string {
-        // receives a token, converts the token to the JSX element and then returns the html string of this element
-        const element = this.convertOneToJSXElement(token);
-        return ReactDOMServer.renderToString(element);
-    }
-
-    convertAllToString(tokens: Token[]): string {
-        let result = "";
-        tokens.forEach((token) => {
-            result += this.convertOneToString(token);
-        }, this);
-        return result;
     }
 }
 
